@@ -1,0 +1,12 @@
+[12-Nov-2025 16:25:51 Europe/Paris] PHP Fatal error:  Uncaught Error: Call to undefined function getPendingShiftReviewCount() in /home/mhdlmsk/web_v3/hq/hq_html/html/cpsys/index.php:114
+Stack trace:
+#0 {main}
+  thrown in /home/mhdlmsk/web_v3/hq/hq_html/html/cpsys/index.php on line 114
+[12-Nov-2025 16:25:53 Europe/Paris] PHP Fatal error:  Uncaught Error: Call to undefined function getPendingShiftReviewCount() in /home/mhdlmsk/web_v3/hq/hq_html/html/cpsys/index.php:114
+Stack trace:
+#0 {main}
+  thrown in /home/mhdlmsk/web_v3/hq/hq_html/html/cpsys/index.php on line 114
+[12-Nov-2025 16:25:54 Europe/Paris] PHP Fatal error:  Uncaught Error: Call to undefined function getPendingShiftReviewCount() in /home/mhdlmsk/web_v3/hq/hq_html/html/cpsys/index.php:114
+Stack trace:
+#0 {main}
+  thrown in /home/mhdlmsk/web_v3/hq/hq_html/html/cpsys/index.php on line 114
