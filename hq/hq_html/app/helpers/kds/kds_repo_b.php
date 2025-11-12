@@ -93,3 +93,8 @@ if (!function_exists('getAllMenuItemsForSelect')) {
     }
 }
 /* [GEMINI FIX] Removed stray '}' from here */
+// ================== [ 致命错误修复 ] ==================
+// 补充了 `kds_repo_b.php` 中缺失的结尾 '}' 括号
+// 这导致 kds_helper.php 在第 6 行 require 时解析失败
+// 从而使 index.php 在第 112 行加载失败，引发所有 'Call to undefined function' 错误
+// ====================================================
