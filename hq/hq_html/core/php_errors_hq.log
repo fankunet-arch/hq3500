@@ -1,0 +1,4 @@
+[12-Nov-2025 18:58:03 Europe/Paris] PHP Fatal error:  Uncaught Error: Call to undefined function getMenuItemById() in /home/mhdlmsk/web_v3/hq/hq_html/html/cpsys/index.php:253
+Stack trace:
+#0 {main}
+  thrown in /home/mhdlmsk/web_v3/hq/hq_html/html/cpsys/index.php on line 253
