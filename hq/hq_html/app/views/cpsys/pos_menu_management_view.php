@@ -69,8 +69,8 @@
                 <label for="pos_category_id" class="form-label">所属分类 <span class="text-danger">*</span></label>
                 <select class="form-select" id="pos_category_id" name="pos_category_id" required>
                     <option value="">-- 请选择分类 --</option>
-                    <?php if (isset($categories) && !empty($categories)): ?>
-                        <?php foreach ($categories as $category): ?>
+                    <?php if (isset($pos_categories) && !empty($pos_categories)): ?>
+                        <?php foreach ($pos_categories as $category): ?>
                             <option value="<?php echo $category['id']; ?>">
                                 <?php echo htmlspecialchars($category['name_zh'] . ' / ' . $category['name_es']); ?>
                             </option>
