@@ -26,6 +26,29 @@ if (!function_exists('getAllIceOptions')) {
     }
 }
 
+// ================== [ 错误修复 START ] ==================
+// 补充缺失的 getIceOptionById 函数
+if (!function_exists('getIceOptionById')) {
+    function getIceOptionById(PDO $pdo, int $id): ?array {
+        $sql = "
+            SELECT 
+                i.id, i.ice_code,
+                it_zh.ice_option_name AS name_zh, 
+                it_es.ice_option_name AS name_es,
+                it_zh.sop_description AS sop_zh,
+                it_es.sop_description AS sop_es
+            FROM kds_ice_options i
+            LEFT JOIN kds_ice_option_translations it_zh ON i.id = it_zh.ice_option_id AND it_zh.language_code = 'zh-CN'
+            LEFT JOIN kds_ice_option_translations it_es ON i.id = it_es.ice_option_id AND it_es.language_code = 'es-ES'
+            WHERE i.id = ? AND i.deleted_at IS NULL
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+}
+// ================== [ 错误修复 END ] ==================
+
 if (!function_exists('getAllSweetnessOptions')) {
     function getAllSweetnessOptions(PDO $pdo): array {
         $sql = "
@@ -43,6 +66,30 @@ if (!function_exists('getAllSweetnessOptions')) {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+
+// ================== [ 错误修复 START ] ==================
+// 补充缺失的 getSweetnessOptionById 函数
+if (!function_exists('getSweetnessOptionById')) {
+    function getSweetnessOptionById(PDO $pdo, int $id): ?array {
+        $sql = "
+            SELECT 
+                s.id, s.sweetness_code,
+                st_zh.sweetness_option_name AS name_zh, 
+                st_es.sweetness_option_name AS name_es,
+                st_zh.sop_description AS sop_zh,
+                st_es.sop_description AS sop_es
+            FROM kds_sweetness_options s
+            LEFT JOIN kds_sweetness_option_translations st_zh ON s.id = st_zh.sweetness_option_id AND st_zh.language_code = 'zh-CN'
+            LEFT JOIN kds_sweetness_option_translations st_es ON s.id = st_es.sweetness_option_id AND st_es.language_code = 'es-ES'
+            WHERE s.id = ? AND s.deleted_at IS NULL
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+}
+// ================== [ 错误修复 END ] ==================
+
 
 if (!function_exists('getAllCups')) {
     // [GEMINI FIX] 修复了 SQL，不再 JOIN kds_cup_translations
@@ -175,6 +222,23 @@ if (!function_exists('getAddonTagIds')) {
         }
     }
 }
+
+// ================== [ 错误修复 START ] ==================
+// 补充 index.php:253 (page=pos_variants_management) 所需的 getMenuItemById
+if (!function_exists('getMenuItemById')) {
+    function getMenuItemById(PDO $pdo, int $menu_item_id): ?array {
+        $sql = "
+            SELECT mi.*, pc.name_zh AS category_name_zh
+            FROM pos_menu_items mi
+            LEFT JOIN pos_categories pc ON mi.pos_category_id = pc.id
+            WHERE mi.id = ? AND mi.deleted_at IS NULL
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$menu_item_id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+}
+// ================== [ 错误修复 END ] ==================
 
 /** ========== Materials & Units（与 repo_a 可能重叠，故加防重复） ========== */
 
