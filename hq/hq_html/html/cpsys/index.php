@@ -283,9 +283,13 @@ try {
         case 'pos_tag_management': // R2.1
             check_role(ROLE_PRODUCT_MANAGER);
             $page_title = 'POS 标签管理 (次卡)';
-            $js_files = ['pos_tag_management.js'];
+            $js_files = ['pos_tags_management.js'];
             $data['pos_tags'] = getAllPosTags($pdo);
-            $view_path = realpath(__DIR__ . '/../../app/views/cpsys/pos_tag_management_view.php');
+            // ================== [ 1.png 错误修复 ] ==================
+            // 修复了视图文件名的拼写错误：
+            // pos_tag_management_view.php -> pos_tags_management_view.php
+            // =======================================================
+            $view_path = realpath(__DIR__ . '/../../app/views/cpsys/pos_tags_management_view.php');
             break;
 
         case 'pos_seasons_pass_dashboard': // B3
