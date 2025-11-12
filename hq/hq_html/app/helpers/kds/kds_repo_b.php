@@ -7,6 +7,10 @@
  * - Minimal columns only; avoid coupling to non-essential fields.
  * - Safe to co-exist: each function is wrapped with !function_exists to prevent redeclare fatals.
  * - No closing PHP tag to avoid BOM/whitespace issues.
+ *
+ * [GEMINI FIX 2025-11-12]:
+ * 1. Corrected pmi.category_id -> pmi.pos_category_id (Fixes SQL Error 1054)
+ * 2. Removed stray '}' at end of file (Fixes Parse Error)
  */
 
 if (!function_exists('getAllGlobalRules')) {
@@ -55,7 +59,7 @@ if (!function_exists('getAllMenuItems')) {
                 COALESCE(MAX(CASE WHEN ppa.store_id = :store_id THEN ppa.is_sold_out END), 0) AS is_sold_out
             FROM pos_menu_items pmi
             LEFT JOIN pos_categories pc
-                ON pc.id = pmi.category_id
+                ON pc.id = pmi.pos_category_id /* [GEMINI FIX] Was pmi.category_id */
             LEFT JOIN pos_product_availability ppa
                 ON ppa.menu_item_id = pmi.id
             GROUP BY pmi.id
@@ -88,3 +92,4 @@ if (!function_exists('getAllMenuItemsForSelect')) {
         return $out;
     }
 }
+/* [GEMINI FIX] Removed stray '}' from here */
